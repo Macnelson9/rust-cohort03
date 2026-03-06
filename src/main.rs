@@ -1,4 +1,9 @@
 mod grouping;
+mod Assignments;
+mod error_handling;
+mod file_system;
+use file_system::main as file_system;
+use error_handling::error;
 
 use grouping::group;
 const X: u32 = 5;
@@ -10,33 +15,82 @@ fn shadowing() {
     println!("{}", x);
 }
 
+#[derive(Debug)]
+enum Option{
+    None,
+    Some(String)
+}
+
+
 fn main() {
+    file_system();
+    error();
+    let sample = Option::None;
+    match sample {
+        Option::Some(x) =>{
+            println!("1 a value exist and it {}", x);
+        }
+        Option::None => {
+            println!("1 no value ");
+        }
+    }
+    let sample = Option::Some("hello".to_string());
+    match sample {
+        Option::Some(x) =>{
+            println!("2 a value exist and it {}", x);
+        }
+        Option::None => {
+            println!("2 no value ");
+        }
+    }
+
+    let sample = Some(9);
+    match sample {
+        Some(x) =>{
+            println!("2 a value exist and it {}", x);
+        }
+        _ => {
+            println!("2 no value ");
+        }
+    }
+
+    let result:Result<&str, String> = Ok("hello");
+
+    match result {
+        Ok(x)=>{
+            println!("result value {}",x);
+        }
+        Err(error)=>{
+            println!("error {}",error);
+        }
+
+    }
     group();
-    // let mut name = "John";
-    // println!("Hello, world! {}", X);
-    // println!("{}", name);
+    let mut name = "John";
+    println!("Hello, world! {}", X);
+    println!("{}", name);
 
-    // // let y = x + 23;
-    // // X = 23;
-    // name = "Jane";
-    // println!("{}", name);
-    // println!(" ------ {}", X);
+    // let y = x + 23;
+    // X = 23;
+    name = "Jane";
+    println!("{}", name);
+    println!(" ------ {}", X);
 
-    // // shadowing();
-    // let name = String::from("martin");
-    // // user_name(name);
-    // // user_name("Chris".to_string());
-    // // user_name("Emma".to_string());
+    // shadowing();
+    let name = String::from("martin");
+    // user_name(name);
+    // user_name("Chris".to_string());
+    // user_name("Emma".to_string());
 
-    // // sub(20, 10);
+    // sub(20, 10);
 
-    // // user("Mark", 23, "mark@gmail.co".to_string(), true);
+    // user("Mark", 23, "mark@gmail.co".to_string(), true);
 
-    // // conditionals();
+    // conditionals();
 
-    // school_conditionals();
-    // loops();
-    // while_loop();
+    school_conditionals();
+    loops();
+    while_loop();
 }
 
 fn user_name(name: String) {
